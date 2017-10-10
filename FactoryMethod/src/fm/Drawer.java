@@ -19,7 +19,7 @@ public class Drawer extends JPanel {
 		setVisible(true);
 		
 		// FM
-		FigureGenerator figureGenerator = new RandomFigureGenerator();
+		FigureGenerator figureGenerator = new MonkeyFigureGenerator();
 		animal = figureGenerator.getAnimal();
 		environment = figureGenerator.getEnvironment();
 	}
