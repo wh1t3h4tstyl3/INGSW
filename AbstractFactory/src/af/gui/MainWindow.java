@@ -17,6 +17,7 @@ public class MainWindow extends JFrame {
 		add(new StartBoard());
 		setTitle("Car_Generator");
 		setVisible(true);
+		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);

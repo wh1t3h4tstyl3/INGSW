@@ -1,11 +1,14 @@
-package af.gui;
+package af.factories;
+
+import java.awt.image.BufferedImage;
+
+import af.products.Cars;
 
 public interface AbstractFactory {
-	public String makeStringUtilitaria1();
-	public String makeStringUtilitaria2();
-	public String makeStringUtilitaria3();
+	public Cars makeUtilitarie();
 	public String makeStringSuv1();
 	public String makeStringSuv2();
 	public String makeStringBerlina1();
 	public String makeStringBerlina2();
+	public BufferedImage makeLogo();
 }
