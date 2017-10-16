@@ -42,6 +42,10 @@ public class StartBoard extends JPanel implements ItemListener, ActionListener {
 	private JButton berlina1;
 	private JButton berlina2;
 	
+	private Cars utilitarie;
+	private Cars berline;
+	private Cars suvs;
+	
 	private String brand;
 	
 	private DrawPanel drawPanel;
@@ -52,6 +56,8 @@ public class StartBoard extends JPanel implements ItemListener, ActionListener {
 		factory = new BMWFactory();
 		logo = factory.makeLogo();
 		utilitarie = factory.makeUtilitarie();
+		berline = factory.makeBerline();
+		suvs = factory.makeSuv();
 		addComponentToPane();
 	}
 	
@@ -63,48 +69,66 @@ public class StartBoard extends JPanel implements ItemListener, ActionListener {
 				cb.setEditable(false);
 				cb.addItemListener(this);
 				comboBoxPane.add(cb);
+				JButton b = new JButton("RESET");
+				b.setName("RESET");
+				b.addActionListener(this);
+				comboBoxPane.add(b);
 
 				//Create the "cards".
 				JPanel card1 = new JPanel();
 				berlina = new JButton("BERLINA");
 				berlina.addActionListener(this);
+				berlina.setName("berlina");
 				card1.add(berlina);
 				utilitaria = new JButton("UTILITARIA");
 				utilitaria.addActionListener(this);
+				utilitaria.setName("utilitaria");
 				card1.add(utilitaria);
 				suv = new JButton("SUV");
 				suv.addActionListener(this);
+				suv.setName("suv");
 				card1.add(suv);
 				
 				JPanel card2 = new JPanel();
 				utilitaria1 = new JButton(utilitarie.getName(1));
 				utilitaria1.addActionListener(this);
+				utilitaria1.setName("utilitaria1");
 				card2.add(utilitaria1);
 				utilitaria2 = new JButton(utilitarie.getName(2));
 				utilitaria2.addActionListener(this);
+				utilitaria2.setName("utilitaria2");
 				card2.add(utilitaria2);
 				utilitaria3 = new JButton(utilitarie.getName(3));
 				utilitaria3.addActionListener(this);
+				utilitaria3.setName("utilitaria3");
 				card2.add(utilitaria3);
 				
 				JPanel card3 = new JPanel();
-				suv1 = new JButton(factory.makeStringSuv1());
+				suv1 = new JButton(suvs.getName(1));
+				suv1.addActionListener(this);
+				suv1.setName("suv1");
 				card3.add(suv1);
-				suv2 = new JButton(factory.makeStringSuv2());
+				suv2 = new JButton(suvs.getName(2));
+				suv2.addActionListener(this);
+				suv2.setName("suv2");
 				card3.add(suv2);
 				
 				JPanel card4 = new JPanel();
-				berlina1 = new JButton(factory.makeStringBerlina1());
+				berlina1 = new JButton(berline.getName(1));
+				berlina1.addActionListener(this);
+				berlina1.setName("berlina1");
 				card4.add(berlina1);
-				berlina2 = new JButton(factory.makeStringBerlina2());
+				berlina2 = new JButton(berline.getName(2));
+				berlina2.addActionListener(this);
+				berlina2.setName("berlina2");
 				card4.add(berlina2);
 				
 				//Create the panel that contains the "cards".
 				cards = new JPanel(new CardLayout());
 				cards.add(card1, "TYPES");
-				cards.add(card2, "UTILITARIE");
-				cards.add(card3, "SUV");
-				cards.add(card4, "BERLINA");
+				cards.add(card2, "utilitaria");
+				cards.add(card3, "suv");
+				cards.add(card4, "berlina");
 				
 				setPreferredSize(new Dimension(1366, 768));
 				add(comboBoxPane);
@@ -113,11 +137,11 @@ public class StartBoard extends JPanel implements ItemListener, ActionListener {
 				add(cards);
 	}
 	
-	Cars utilitarie;
 	
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		brand = (String) e.getItem();
+		
 		if(brand.equals(BMWPANEL)) factory = new BMWFactory();
 		
 		else if(brand.equals(FIATPANEL)) factory = new FIATFactory();
@@ -127,16 +151,17 @@ public class StartBoard extends JPanel implements ItemListener, ActionListener {
 		drawPanel.setLogo(factory.makeLogo(), true);
 		
 		utilitarie = factory.makeUtilitarie();
-
 		utilitaria1.setText(utilitarie.getName(1));
 		utilitaria2.setText(utilitarie.getName(2));
 		utilitaria3.setText(utilitarie.getName(3));
 		
-		suv1.setText(factory.makeStringSuv1());
-		suv2.setText(factory.makeStringSuv2());
+		suvs = factory.makeSuv();		
+		suv1.setText(suvs.getName(1));
+		suv2.setText(suvs.getName(2));
 		
-		berlina1.setText(factory.makeStringBerlina1());
-		berlina2.setText(factory.makeStringBerlina2());
+		berline = factory.makeBerline();
+		berlina1.setText(berline.getName(1));
+		berlina2.setText(berline.getName(2));
 		
 		CardLayout c = (CardLayout) cards.getLayout();
 		c.show(cards, "TYPES");
@@ -144,14 +169,15 @@ public class StartBoard extends JPanel implements ItemListener, ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getSource() == berlina ) {
 			CardLayout c = (CardLayout) cards.getLayout();
-			c.show(cards, "BERLINA");
+			c.show(cards, "berlina");
 		}
 		
 		else if(e.getSource() == utilitaria ) {
 			CardLayout c = (CardLayout) cards.getLayout();
-			c.show(cards, "UTILITARIE");
+			c.show(cards, "utilitaria");
 			if(brand.equals(BMWPANEL)) {
 				utilitaria1.setVisible(false);
 				utilitaria3.setVisible(false);
@@ -164,7 +190,7 @@ public class StartBoard extends JPanel implements ItemListener, ActionListener {
 		
 		else if(e.getSource() == suv ) {
 			CardLayout c = (CardLayout) cards.getLayout();
-			c.show(cards, "SUV");
+			c.show(cards, "suv");
 		}
 		
 		else if(e.getSource() == utilitaria1) {
@@ -178,6 +204,27 @@ public class StartBoard extends JPanel implements ItemListener, ActionListener {
 		else if(e.getSource() == utilitaria3) {
 			drawPanel.setLogo(utilitarie.getImage(3), false);
 		}
-	
+		
+		else if(e.getSource() == berlina1) {
+			drawPanel.setLogo(berline.getImage(1), false);
+		}
+		
+		else if(e.getSource() == berlina2) {
+			drawPanel.setLogo(berline.getImage(2), false);
+		}
+		
+		else if(e.getSource() == suv1) {
+			drawPanel.setLogo(suvs.getImage(1), false);
+		}
+		
+		else if(e.getSource() == suv2) {
+			drawPanel.setLogo(suvs.getImage(2), false);
+		}
+		
+		else  if(((JButton) e.getSource()).getText().equals("RESET")) {
+			CardLayout c = (CardLayout) cards.getLayout();
+			c.show(cards, "TYPES");
+			drawPanel.setLogo(factory.makeLogo(), true);
+		}
 	}
 }

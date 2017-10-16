@@ -15,11 +15,11 @@ public class CITROENUtilitarie implements Cars {
 		imagesUtilitarie = new HashMap<>();
 		
 		nomiUtilitarie.put(new Integer(1), "C1");
-		imagesUtilitarie.put(new Integer(1), ImageProvider.getInstance().getImage("BMWUtilitaria1"));
+		imagesUtilitarie.put(new Integer(1), ImageProvider.getInstance().getImage("CITROENUtilitaria1"));
 		nomiUtilitarie.put(new Integer(2), "C2");
-		imagesUtilitarie.put(new Integer(2), ImageProvider.getInstance().getImage("BMWUtilitaria1"));
+		imagesUtilitarie.put(new Integer(2), ImageProvider.getInstance().getImage("CITROENUtilitaria2"));
 		nomiUtilitarie.put(new Integer(3), "C3");
-		imagesUtilitarie.put(new Integer(3), ImageProvider.getInstance().getImage("BMWUtilitaria1"));
+		imagesUtilitarie.put(new Integer(3), ImageProvider.getInstance().getImage("CITROENUtilitaria3"));
 		
 	}
 

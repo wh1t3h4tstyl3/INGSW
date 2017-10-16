@@ -14,14 +14,8 @@ public class BMWUtilitarie implements Cars {
 		nomiUtilitarie = new HashMap<>();
 		imagesUtilitarie = new HashMap<>();
 		
-		nomiUtilitarie.put(new Integer(1), "i3");
-		imagesUtilitarie.put(new Integer(1), ImageProvider.getInstance().getImage("BMWUtilitaria1"));
-		
 		nomiUtilitarie.put(new Integer(2), "i3");
 		imagesUtilitarie.put(new Integer(2), ImageProvider.getInstance().getImage("BMWUtilitaria1"));
-		
-		nomiUtilitarie.put(new Integer(3), "i3");
-		imagesUtilitarie.put(new Integer(3), ImageProvider.getInstance().getImage("BMWUtilitaria1"));
 	}
 	
 	@Override

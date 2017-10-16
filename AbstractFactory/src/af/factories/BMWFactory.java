@@ -3,6 +3,8 @@ package af.factories;
 import java.awt.image.BufferedImage;
 
 import af.assetsManager.ImageProvider;
+import af.products.BMWBerline;
+import af.products.BMWSuv;
 import af.products.BMWUtilitarie;
 import af.products.Cars;
 
@@ -14,23 +16,13 @@ public class BMWFactory implements AbstractFactory {
 	}
 
 	@Override
-	public String makeStringSuv1() {
-		return new String("X5");
+	public Cars makeSuv() {
+		return new BMWSuv();
 	}
 
 	@Override
-	public String makeStringSuv2() {
-		return new String("X6");
-	}
-
-	@Override
-	public String makeStringBerlina1() {
-		return new String("320");
-	}
-
-	@Override
-	public String makeStringBerlina2() {
-		return new String("Serie 5");
+	public Cars makeBerline() {
+		return new BMWBerline();
 	}
 
 	@Override

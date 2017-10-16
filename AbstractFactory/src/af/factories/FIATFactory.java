@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 
 import af.assetsManager.ImageProvider;
 import af.products.Cars;
+import af.products.FIATBerline;
+import af.products.FIATSuv;
 import af.products.FIATUtilitarie;
 
 public class FIATFactory implements AbstractFactory {
@@ -14,23 +16,14 @@ public class FIATFactory implements AbstractFactory {
 	}
 
 	@Override
-	public String makeStringSuv1() {
-		return new String("500X");
+	public Cars makeSuv() { 
+		return new FIATSuv();
 	}
+	
 
 	@Override
-	public String makeStringSuv2() {
-		return new String("Toro");
-	}
-
-	@Override
-	public String makeStringBerlina1() {
-		return new String("Tipo");
-	}
-
-	@Override
-	public String makeStringBerlina2() {
-		return new String("Bravo");
+	public Cars makeBerline() {
+		return new FIATBerline();
 	}
 
 	@Override

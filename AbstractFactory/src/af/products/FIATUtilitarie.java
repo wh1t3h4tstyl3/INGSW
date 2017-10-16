@@ -14,11 +14,11 @@ public class FIATUtilitarie implements Cars {
 		imagesUtilitarie = new HashMap<>();
 		
 		nomiUtilitarie.put(new Integer(1), "Panda");
-		imagesUtilitarie.put(new Integer(1), ImageProvider.getInstance().getImage("BMWUtilitaria1"));
+		imagesUtilitarie.put(new Integer(1), ImageProvider.getInstance().getImage("FIATUtilitaria1"));
 		nomiUtilitarie.put(new Integer(2), "500");
-		imagesUtilitarie.put(new Integer(2), ImageProvider.getInstance().getImage("BMWUtilitaria1"));
+		imagesUtilitarie.put(new Integer(2), ImageProvider.getInstance().getImage("FIATUtilitaria2"));
 		nomiUtilitarie.put(new Integer(3), "Grande Punto");
-		imagesUtilitarie.put(new Integer(3), ImageProvider.getInstance().getImage("BMWUtilitaria1"));
+		imagesUtilitarie.put(new Integer(3), ImageProvider.getInstance().getImage("FIATUtilitaria3"));
 		
 	}
 

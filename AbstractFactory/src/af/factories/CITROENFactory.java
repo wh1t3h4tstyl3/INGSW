@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 
 import af.assetsManager.ImageProvider;
 import af.products.Cars;
+import af.products.CITROENSuv;
+import af.products.CITROENBerline;
 import af.products.CITROENUtilitarie;
 
 public class CITROENFactory implements AbstractFactory {
@@ -14,23 +16,13 @@ public class CITROENFactory implements AbstractFactory {
 	}
 
 	@Override
-	public String makeStringSuv1() {
-		return new String("C3 AirCross");
+	public Cars makeSuv() {
+		return new CITROENSuv();
 	}
 
 	@Override
-	public String makeStringSuv2() {
-		return new String("C5 AirCross");
-	}
-
-	@Override
-	public String makeStringBerlina1() {
-		return new String("DS4");
-	}
-
-	@Override
-	public String makeStringBerlina2() {
-		return new String("C6");
+	public Cars makeBerline() {
+		return new CITROENBerline();
 	}
 
 	@Override
