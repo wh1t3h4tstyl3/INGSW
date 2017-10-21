@@ -2,18 +2,19 @@ package ingsw.bridge.implementations;
 
 import java.awt.image.BufferedImage;
 
+import ingsw.bridge.assetsmanager.ImageProvider;
+
 public class AMDImpl implements Implementation {
 
 	@Override
 	public BufferedImage addCPU() {
-		return null;
+		return ImageProvider.getInstance().getImage("AMDCPU");
 
 	}
 
 	@Override
 	public BufferedImage addGPU() {
-		return null;
-
+		return ImageProvider.getInstance().getImage("ATIGPU");
 	}
 
 	@Override

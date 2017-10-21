@@ -1,6 +1,7 @@
 package ingsw.bridge.gui;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -24,6 +25,8 @@ public class DrawPanel extends JPanel implements ActionListener {
 	private final static String DELL = "Dell";
 	private final static String ASUS = "Asus";
 	private JPanel cardPanel;
+	private JButton buttonCPU;
+	private JButton buttonGPU;
 	
 	public DrawPanel() {
 		super(new GridLayout(3, 1));
@@ -34,7 +37,7 @@ public class DrawPanel extends JPanel implements ActionListener {
 	private void init() {
 		// Create and set up the content pane.
 		setPreferredSize(new Dimension(1366, 768));
-
+		setBackground(Color.BLUE.darker());
 		// Create and Setup Buttons
 		String[] fields = { HP, DELL, ASUS };
 		JComboBox<Object> comboBox = new JComboBox<>(fields);
@@ -42,7 +45,8 @@ public class DrawPanel extends JPanel implements ActionListener {
 		comboBox.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange() == ItemEvent.DESELECTED) {
+				
+				if(e.getStateChange() == ItemEvent.SELECTED) {
 					String brand = "ingsw.bridge.abstractions." + (String)e.getItem();
 					try {
 						MainProgram.computerAbstraction = 
@@ -50,28 +54,50 @@ public class DrawPanel extends JPanel implements ActionListener {
 					} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
 						e1.printStackTrace();
 					}
+					
 					CardLayout c = (CardLayout) cardPanel.getLayout();
 					c.show(cardPanel, "IMPLEMENTATION");
+					
+					buttonCPU.setEnabled(true);
+					buttonGPU.setEnabled(true);
+					
+					if(brand.equals("ingsw.bridge.abstractions." + HP)) DrawPanel.this.setBackground(Color.BLUE.darker());
+					else if(brand.equals("ingsw.bridge.abstractions." + ASUS)) DrawPanel.this.setBackground(Color.DARK_GRAY);
+					else if(brand.equals("ingsw.bridge.abstractions." + DELL)) DrawPanel.this.setBackground(Color.RED.darker());
+					else DrawPanel.this.setBackground(null);
+					
+					repaint();
 				}
 			}
 		});
 
 		JPanel comboBoxPanel = new JPanel();
+		comboBoxPanel.setOpaque(false);
 		comboBoxPanel.add(comboBox);
 		
 		
 		cardPanel = new JPanel(new CardLayout());
 		cardPanel.setVisible(true);
+		cardPanel.setOpaque(false);
 		
 		// CARDS
 		// IMPLEMENTATION CARD
 		JPanel card = new JPanel();
+		card.setOpaque(false);
+		card.setLayout(null);
 		JButton button = new JButton("Intel");
 		button.setName("ingsw.bridge.implementations.IntelImpl");
 		button.addActionListener(this);
+		button.setBounds(500, 85, 100, 64);
 		card.add(button);
 		button = new JButton("AMD");
 		button.setName("ingsw.bridge.implementations.AMDImpl");
+		button.setBounds(610, 85, 100, 64);
+		button.addActionListener(this);
+		card.add(button);
+		button = new JButton("Nvidia");
+		button.setName("ingsw.bridge.implementations.IntelNvidiaImpl");
+		button.setBounds(720, 85, 100, 64);
 		button.addActionListener(this);
 		card.add(button);
 		
@@ -79,9 +105,23 @@ public class DrawPanel extends JPanel implements ActionListener {
 		
 		// COMPONENTS CARD
 		card = new JPanel();
-		button = new JButton("ADD CPU");
-		card.add(button);
-		button = new JButton("ADD GPU");
+		card.setLayout(null);
+		card.setOpaque(false);
+		buttonCPU = new JButton("ADD CPU");
+		buttonCPU.setName("CPU");
+		buttonCPU.setBounds(580, 85, 100, 64);
+		buttonCPU.addActionListener(this);
+		card.add(buttonCPU);
+		buttonGPU = new JButton("ADD GPU");
+		buttonGPU.setName("GPU");
+		buttonGPU.setBounds(690, 85, 100, 64);
+		buttonGPU.addActionListener(this);
+		card.add(buttonGPU);
+		
+		button = new JButton("BACK");
+		button.setName("BACK");
+		button.setBounds(635, 180, 100, 40);
+		button.addActionListener(this);
 		card.add(button);
 		
 		cardPanel.add(card, "COMPONENTS");
@@ -103,20 +143,42 @@ public class DrawPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Set new Implementation
-		try {
-			MainProgram.computerAbstraction.setImplementation(
-					(Implementation) Class.forName(
-					((JButton)e.getSource()).getName()
-				).newInstance()
-			);
-			
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
-			e1.printStackTrace();
+		
+		String name = ((JButton)e.getSource()).getName();
+		
+		if(name.equals("CPU")) {
+			MainProgram.computerAbstraction.addCpu();
+			((JButton)e.getSource()).setEnabled(false);
+			repaint();
 		}
+		
+		else if(name.equals("GPU")) {
+			MainProgram.computerAbstraction.addGpu();
+			((JButton)e.getSource()).setEnabled(false);
+			repaint();
+		}
+		
+		else if(name.equals("BACK")) {
+			CardLayout c = (CardLayout) cardPanel.getLayout();
+			c.show(cardPanel, "IMPLEMENTATION");
+			MainProgram.computerAbstraction.removeAll();
+			buttonCPU.setEnabled(true);
+			buttonGPU.setEnabled(true);
+			repaint();
+		}
+		
+		else {
+			try {
+				MainProgram.computerAbstraction.setImplementation(
+						(Implementation) Class.forName((name)).newInstance()
+				);
 				
-		
-		CardLayout c = (CardLayout) cardPanel.getLayout();
-		c.show(cardPanel, "COMPONENTS");
-		
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
+				e1.printStackTrace();
+			}
+						
+			CardLayout c = (CardLayout) cardPanel.getLayout();
+			c.show(cardPanel, "COMPONENTS");
+		}
 	}
 }

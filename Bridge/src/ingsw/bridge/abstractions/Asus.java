@@ -1,7 +1,5 @@
 package ingsw.bridge.abstractions;
 
-import java.awt.Graphics;
-
 import ingsw.bridge.assetsmanager.ImageProvider;
 
 public class Asus extends ComputerAbstraction {
@@ -16,17 +14,11 @@ public class Asus extends ComputerAbstraction {
 	
 	@Override
 	public void addCpu() {
-
+		this.cpu = this.getImplementation().addCPU();
 	}
 
 	@Override
 	public void addGpu() {
-
+		this.gpu = this.getImplementation().addGPU();
 	}
-
-	@Override
-	public void publish(Graphics g) {
-		g.drawImage(this.brand, 200, 500, null);
-	}
-
 }

@@ -2,17 +2,18 @@ package ingsw.bridge.implementations;
 
 import java.awt.image.BufferedImage;
 
+import ingsw.bridge.assetsmanager.ImageProvider;
+
 public class IntelNvidiaImpl implements Implementation {
 
 	@Override
 	public BufferedImage addCPU() {
-		return null;
-
+		return ImageProvider.getInstance().getImage("IntelCPU");
 	}
 
 	@Override
 	public BufferedImage addGPU() {
-		return null;
+		return ImageProvider.getInstance().getImage("NvidiaGPU");
 	}
 
 	@Override
