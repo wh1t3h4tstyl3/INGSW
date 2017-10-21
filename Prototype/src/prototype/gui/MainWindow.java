@@ -16,11 +16,12 @@ public class MainWindow extends JFrame {
 		setFocusable(true);
 		add(new StartBoard());
 		setTitle("Car_Generator");
-		setVisible(true);
+		
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 		
 	public static void main(String[] args) {
