@@ -60,8 +60,16 @@ public class Authentication {
 		myPanel.add(new JLabel("Password:"));
 		myPanel.add(yField);
 
-		JOptionPane.showConfirmDialog(null, myPanel, "Please Enter Username and Password",
-				JOptionPane.OK_CANCEL_OPTION);
+		Object[] optionsE = {"Ok", "Cancel"};
+		JOptionPane.showOptionDialog(null,
+			    myPanel,
+			    "Please insert username and password",
+			    JOptionPane.YES_OPTION,
+			    JOptionPane.DEFAULT_OPTION,
+			    null,
+			    optionsE,
+			    optionsE[1]);
+		
 		
 		if("Admin".equals(users.get(xField.getText() + "+" + yField.getText())))
 			return new Gallery(screenSize);
