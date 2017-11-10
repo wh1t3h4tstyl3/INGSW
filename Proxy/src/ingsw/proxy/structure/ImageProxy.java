@@ -3,8 +3,6 @@ package ingsw.proxy.structure;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import ingsw.flyweight.structure.ImageProvider;
-
 public class ImageProxy implements ImageWrapped {
 	
 	private Image realImage;
@@ -24,7 +22,7 @@ public class ImageProxy implements ImageWrapped {
 
 	private Image getRealImage() {
 		if(this.realImage == null)
-			this.realImage = ImageProvider.getInstance().getImage(path, screenSize);
+			this.realImage = new Image(path, screenSize);
 		
 		return this.realImage;
 	}

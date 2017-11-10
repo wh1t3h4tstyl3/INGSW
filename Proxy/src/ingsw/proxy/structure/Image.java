@@ -24,6 +24,9 @@ public class Image implements ImageWrapped {
 			e.printStackTrace();
 		}
 		this.path = path;
+		
+		System.out.println(path);
+		
 		String[] tmp = path.split("\\\\");
 		this.name = tmp[tmp.length-1].split("\\.")[0];
 		setPosition(screenSize);

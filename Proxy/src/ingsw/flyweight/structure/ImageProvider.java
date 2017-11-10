@@ -22,15 +22,12 @@ public class ImageProvider {
 		return instance;
 	}
 	
-	public Image getImage(String imageName, Dimension screenSize) {
+	public Image getImage(String imageName) {
 		
 		Image image = images.get(imageName);
 		
 		if(image == null)
-			images.put(new String(imageName), (image = new Image(imageName, screenSize)));
-		
-		image.setPosition(screenSize);
-		
+			images.put(new String(imageName), (image = new Image(imageName, new Dimension())));
 		return image;
 	}
 }

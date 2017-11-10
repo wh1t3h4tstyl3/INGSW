@@ -51,7 +51,6 @@ public class Gallery implements AbstractGallery{
 		
 		ImageWrapped im = null;
 		for (int i = 1; i < fileNames.length; i++) {
-			System.out.println(i + " " + fileNames[i]);
 			if(fileNames[i].getName().endsWith("jpg") ||
 					fileNames[i].getName().endsWith("png")) {
 				if(selection == 1) {
