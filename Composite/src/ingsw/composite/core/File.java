@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import ingsw.visitor.Visitor;
+
 public class File extends FileSystem {
 
 	private String fileName;
@@ -16,6 +18,10 @@ public class File extends FileSystem {
 	public File(String fileName) {
 		this.fileName = fileName;
 		this.path = "Files/" + this.fileName;
+	}
+	
+	public String getFileContent() {
+		return fileContent;
 	}
 	
 	@Override
@@ -46,5 +52,10 @@ public class File extends FileSystem {
 		} catch (IOException e) {
 			throw new RuntimeException("File " + this.fileName + " was placed in another path");
 		}
+	}
+	
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visitFile(this);
 	}
 }

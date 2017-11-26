@@ -1,42 +1,26 @@
 package ingsw.template;
 
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class SubsetSumBT extends RecursiveBacktracking {
 
 	private LinkedList<Integer> solutionSpace;
-	private LinkedList<Integer> numbers;
+	private List<Integer> numbers;
 	private int sum;
 	private int total;
 	
-	public SubsetSumBT() {		
-		init();
-		solve(0, numbers.size()-1);
-		printSolution();
-	}
-	
-	private void init() {
-		
+	public SubsetSumBT(List<Integer> numbers, int total) {		
+		this.numbers = numbers;
+		this.total = total;
 		solutionSpace = new LinkedList<>();
-		numbers = new LinkedList<>();
 		sum = 0;
-		total = 100;
-		
-		numbers.add(144);
-		numbers.add(10);
-		numbers.add(10);
-		numbers.add(30);
-		numbers.add(9);
-		numbers.add(8);
-		numbers.add(50);
-		numbers.add(1);
-		numbers.add(30);
+		solve(0, numbers.size()-1);
 	}
 	
-	private void printSolution() {
-		for (int i = 0; i < solutionSpace.size(); i++) {
-			System.out.println(numbers.get(solutionSpace.get(i)));
-		}
+	public void printSolution() {
+		System.out.println(this);
 	}
 	
 	private boolean contain(int x) {
@@ -72,6 +56,17 @@ public class SubsetSumBT extends RecursiveBacktracking {
 	}
 	
 	public static void main(String[] args) {
-		new SubsetSumBT();
+		List<Integer> numbers = Arrays.asList(3, 34, 4, 12, 5, 2);
+		SubsetSumBT subsetSum = new SubsetSumBT(numbers, 9);
+		subsetSum.printSolution();
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder("[");
+		for (int i = 0; i < solutionSpace.size()-1; i++)
+			builder.append((numbers.get(solutionSpace.get(i))) + ",");
+		builder.append(numbers.get(solutionSpace.getLast()) + "]");
+		return builder.toString();
 	}
 }

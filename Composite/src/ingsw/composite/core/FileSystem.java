@@ -2,6 +2,8 @@ package ingsw.composite.core;
 
 import java.util.Map;
 
+import ingsw.visitor.Visitor;
+
 public abstract class FileSystem {
 	
 	protected String path;
@@ -19,6 +21,8 @@ public abstract class FileSystem {
 	public void removeFile(String fileName) {
 		throw new UnsupportedOperationException("Operation is not supported by this class");
 	}
+	
+	public abstract void accept(Visitor visitor);
 	
 	public abstract Map<String, FileSystem> getChildren();
 	

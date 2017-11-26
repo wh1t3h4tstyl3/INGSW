@@ -3,6 +3,7 @@ package ingsw.composite.test;
 import ingsw.composite.core.File;
 import ingsw.composite.core.FileSystem;
 import ingsw.composite.core.Folder;
+import ingsw.visitor.ItemCounter;
 
 public class MainTest {
 
@@ -67,5 +68,9 @@ public class MainTest {
 		
 		//folderRoot.removeFile("Folder_L1_N1");
 		folderRoot.createFileSystem();
+		
+		ItemCounter itemCounter  = new ItemCounter();
+		folderRoot.accept(itemCounter);
+		System.out.println(itemCounter.getInfo());
 	}
 }

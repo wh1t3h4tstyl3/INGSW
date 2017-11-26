@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
+import ingsw.visitor.Visitor;
+
 public class Folder extends FileSystem {
 
 	String fileName;
@@ -72,5 +74,11 @@ public class Folder extends FileSystem {
 			throw new RuntimeException("Folder " + this.fileName + " was placed in another path");
 		}
 		
+	}
+	
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visitFolder(this);
+		children.forEach((k, e) -> e.accept(visitor));
 	}
 }

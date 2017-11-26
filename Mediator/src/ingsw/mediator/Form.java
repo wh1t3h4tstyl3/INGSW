@@ -165,12 +165,12 @@ public class Form extends JPanel {
 		}
 		
 		else if(component instanceof JButton) {
-			System.out.println(regions.getSelectedItem());
-			System.out.println(capitals.getSelectedItem());
-			System.out.println(places.getSelectedItem());
-			System.out.println(name.getText());
-			System.out.println(surname.getText());
-			System.out.println(tel.getText());
+			System.out.println("Regione: " + regions.getSelectedItem());
+			System.out.println("Provincia: " + capitals.getSelectedItem());
+			System.out.println("Città: " + places.getSelectedItem());
+			System.out.println("Nome: " + name.getText());
+			System.out.println("Cognome: " + surname.getText());
+			System.out.println("Cellulare: " + tel.getText());
 		}
 	}
 
